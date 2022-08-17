@@ -24,7 +24,7 @@ export class ArticlesController {
     return this.articleService.getArticles();
   }
 
-  @ApiOperation({summary: "Получение всех статей"})
+  @ApiOperation({summary: "Получение определённой статьи"})
   @ApiResponse({status: 200, type: [Article]})
   @Get(':id')
   getById(@Param('id') id) {

@@ -22,7 +22,7 @@ export class Article {
 
   @Column({
     type: 'datetime',
-    default: () => 'NOW()',
+    default: () => 'CURRENT_TIMESTAMP'
   })
   @Index()
   created_at: string;

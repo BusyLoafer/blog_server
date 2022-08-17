@@ -7,6 +7,9 @@ import { User } from "./users/users.entity";
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { Role } from "./roles/roles.entity";
+import { MealsModule } from './meals/meals.module';
+import { DishesModule } from './dishes/dishes.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   controllers: [],
@@ -14,18 +17,17 @@ import { Role } from "./roles/roles.entity";
   imports: [
     ConfigModule.forRoot({envFilePath: `.${process.env.NODE_ENV}.env`}),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.MYSQL_HOST,
-      port: Number(process.env.MYSQL_PORT),
-      username: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DB,
+      type: 'sqlite',
+      database: 'testdb.sqlite3',
       entities: [Article, User, Role],
-      synchronize: Boolean(process.env.MYSQL_SYNC),
+      synchronize: true,
     }),
     ArticlesModule,
     UsersModule,
     RolesModule,
+    MealsModule,
+    DishesModule,
+    ProductsModule,
   ],
 
 })
