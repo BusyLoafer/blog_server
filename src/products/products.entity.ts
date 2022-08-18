@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Dish } from "src/dishes/dishes.entity";
+import { Column, Entity, Index, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Product {
@@ -15,5 +16,8 @@ export class Product {
   @ApiProperty({ example: 'Описание бурый рис', description: 'Описание продукта' })
   @Column()
   description: string;
+  
+  @ManyToMany(() => Dish)
+  dishes: Dish[]
 
 }

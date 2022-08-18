@@ -9,38 +9,38 @@ export class ArticlesService {
 
   constructor(
     @InjectRepository(Article)
-    private articleRepositiry: Repository<Article>
+    private articleRepository: Repository<Article>
   ) { }
 
   async createArticle(dto: CreateArticleDto) {
-    const article = await this.articleRepositiry.save(dto);
+    const article = await this.articleRepository.save(dto);
     return article;
   }
 
   async getArticles() {
-    const articles = await this.articleRepositiry.find();
+    const articles = await this.articleRepository.find();
     return articles;
   }
 
   async getById(id: number) {
     try {
-      const article = await this.articleRepositiry.findOneByOrFail({id})
+      const article = await this.articleRepository.findOneByOrFail({id})
       return article;
     } catch (error) {
-      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND);
     }
   }
 
   async editArticle(id: number, dto: CreateArticleDto) {
     try {
-      const article = await this.articleRepositiry.findOneByOrFail({id})
+      const article = await this.articleRepository.findOneByOrFail({id})
       article.text = dto.text;
       article.title = dto.title;
       article.created_at = new Date(Date.now()).toISOString();
-      await this.articleRepositiry.save(article);
+      await this.articleRepository.save(article);
       return article;
     } catch (error) {
-      throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND);
     }
   }
 
